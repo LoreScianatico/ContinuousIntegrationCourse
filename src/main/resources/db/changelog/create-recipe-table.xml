@@ -1,0 +1,19 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.7"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.7
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.7.xsd">
+    <changeSet id="createTable-recipe" author="lore">
+        <createSequence sequenceName="SEC_RECIPE" startValue="1" incrementBy="1"/>
+        <createTable tableName="recipe">
+            <column name="id" type="bigint" />
+            <column name="name" type="varchar(255)" />
+            <column name="prep_time" type="varchar(255)" />
+            <column name="cook_time" type="varchar(255)" />
+            <column name="servings" type="varchar(255)" />
+            <column name="directions" type="clob"/>
+        </createTable>
+        <addNotNullConstraint tableName="recipe" columnName="id" columnDataType="bigint" />
+        <addPrimaryKey tableName="recipe" columnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

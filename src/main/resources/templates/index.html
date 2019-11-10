@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>My recipe book</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+
+</head>
+<body>
+
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
+
+                <div class="panel-heading">
+                    <h1 id = "title" class="panel-title">My Recipes!</h1>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive" th:if="${not #lists.isEmpty(recipes)}">
+                        <table class="table table-hover ">
+                            <thead class="thead-inverse">
+                            <tr>
+                                <th>ID</th>
+                                <th>Description</th>
+                            </tr>
+                            </thead>
+                            <tr th:remove="all">
+                                <!--/*@thymesVar id="recipe" type="com.example.testdemo.model.Recipe"*/-->
+                                <td th:text="${recipe.id}">123</td>
+                                <td th:text="${recipe.name}">Tasty Goodnees 1</td>
+                            </tr>
+                            <tr th:remove="all">
+                                <!--/*@thymesVar id="recipe" type="com.example.testdemo.model.Recipe"*/-->
+                                <td th:text="${recipe.id}">12333</td>
+                                <td th:text="${recipe.name}">Tasty Goodnees 2</td>
+                            </tr>
+                            <tr id="recipe-row" th:each="recipe : ${recipes}">
+                                <td th:text="${recipe.id}">334</td>
+                                <td th:text="${recipe.name}">Tasty Goodnees 3</td>
+                                <td><a id="open-link" href="#" th:href="@{'/' + ${recipe.id} }">Open</a></td>
+                                <td><a id="delete-link" href="#" th:href="@{'/delete/' + ${recipe.id} }">Delete</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-1">
+                        <a id="add-button" class="btn btn-primary" href="#" th:href="@{'/new'}" role="button">New</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
