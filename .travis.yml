@@ -3,12 +3,12 @@ language: java
 jdk:
   - openjdk11
 
-#addons:
-#  sonarcloud:
-#    organization: "lorescianatico-github"
-#    token:
-#      secure: "GlexgO5YYmaWa4qr9VdtCK6rjpy0IIWGa4nof42k8f9aZZvNrqyftKPtnmNpu4NgovydPhhWlgif4Z0/1tyPsQiWdCGGIb2N0AqMt7d8kulFA/gITyPuJGu3hfPZVYTjUsfd8Qh2OrmWxxlZO0hyxJaMH/I1ZTv7aHcYZgLZhVyQE3APxI7m5hKLM4f42zjOjuoO3U4tbYDBm5rcV896pS/jCq+Ru8Im/M94wABamabt+4+vsVq7yHDHQY0LwTjBD9MvhBGuTJpbHEJUk01gOZTrhA3ybtMsX5XvTaLPQpl/uZmw4SNbGii5wL12cx4F8l6TRJILZgfQIfjXlUuGIGqgDMjOPssboPV/v65eAHuz8hYDCZypF+FNuZdv4jGRoGKazgc8ILKQ+QsOK1FNm2VtDDCzILmZqCFsjeQLZnFO8W2NXP4EwU32xEUlqEO9/X8pfn5p+qtyn8h6FZ/MT7csQ1yb3VDnMFXUyZ0I44Q+UmAz2vF6mnCG7mjBLMjeKaRJToe2o7yQe8FAvlcAiOhPAdoI4R928mapYQV2zAX2FX2vSregzpZOv/5pPMGAUVrlHubWyBzVrkrhWjJlo3Os4l805bnDrwNnRQhcgBwwlkFwJMPeVPJ8MpWoauVvEdQ85r2XQwfKD07EDMI085NHrXfR9EWNYWKhXhcFtyI="
+addons:
+  sonarcloud:
+    organization: "lorescianatico-github"
+    token:
+      secure: "Dpd9SjfWzo3QhGMwl5TzAunTQB1SEZPYIy/MtY3LuW+fVyHXeEtMqxQTdHmxzXJ/BjjF8RIjjl9V3QtB+1FAksz3CwIA2cvkmsytHxJaKrpnz6uvZFDQYMZHMWpLTJBJclLSO9Um7RKkfp4cbhpbUO4udTR+Ggck97gZyro133Gjcp5HOGwa0PWGjwzZEw8907OYvE6U81S6TJ48suyedcHRSh5+hT2LL8TG3R4pgC71VFVJvJv/ggI9+tMKd+61y46Zom2FAGUvFkoBIL07cM52PwkeFh0vC21B+jd1W6VPH1m25XzOCVOoZECaZFoHIczHQeAGxezl28fxIFax48cBV8rjVoV5v8VYoXfXseYHjdFeg5GvkPug0Fo0OwOwvCdzvbHI3O7ycZNHbc8GIVZJ9+swMw2mm44VsdJSWI0EE/BdK1Ez6F4N507l6rE5UFRvAABnL7cgaeqkp2gpSM2PHlAtFThCjwsbUenuIMuRPSxH/UVhuVtv+rWfPpwu1cZEs6vt8ZSrbC4HYoqnEkiTM6/3AsDAhmAIQ6MayScw9F4wfhpaZY4O1eoiQ116P0e0aZOKAAC9kFG6Z0Os7rqSXRiVxZKVebIRuDYgKipHbz8Vs5xm4PDM7bRTRzYj7VjfzkfSKBurqTmymMCK+97+EpK1e8d2WXmaJJtPIcc="
 
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install #sonar:sonar
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
