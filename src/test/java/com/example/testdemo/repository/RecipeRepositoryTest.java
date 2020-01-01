@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
+import static com.example.testdemo.model.RecipeAssert.*;
 
 @DataJpaTest
 class RecipeRepositoryTest {
@@ -32,9 +32,12 @@ class RecipeRepositoryTest {
     @Test
     void searchRecipes() {
         List<Recipe> results = recipeRepository.findAll();
-        assertEquals(2, results.size());
+        assertThat(results).hasSize(2);
         results = recipeRepository.searchRecipes("A long");
-        assertEquals(1, results.size());
-        assertEquals("A long name here", results.get(0).getName());
+        assertThat(results).hasSize(1);
+        assertThat(results).satisfies(r -> {
+           assertThat(r).hasSize(1);
+           assertThat(r.get(0)).hasName("A long name here");
+        });
     }
 }

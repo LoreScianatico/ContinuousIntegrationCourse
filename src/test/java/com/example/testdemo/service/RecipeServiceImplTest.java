@@ -5,7 +5,6 @@ import com.example.testdemo.form.RecipeForm;
 import com.example.testdemo.form.RecipeName;
 import com.example.testdemo.model.Recipe;
 import com.example.testdemo.repository.RecipeRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
@@ -19,6 +18,9 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
+import static com.example.testdemo.form.RecipeNameAssert.*;
+import static com.example.testdemo.form.RecipeFormAssert.*;
 
 @ExtendWith(MockitoExtension.class)
 class RecipeServiceImplTest {
@@ -39,9 +41,11 @@ class RecipeServiceImplTest {
         Mockito.when(conversionService.convert(ArgumentMatchers.any(Recipe.class), ArgumentMatchers.eq(RecipeName.class))).thenReturn(recipeName);
         Mockito.when(recipeRepository.findAll()).thenReturn(List.of(recipe));
         List<RecipeName> results = recipeService.getAllRecipes();
-        assertNotNull(results);
-        assertEquals(1L, results.get(0).getId());
-        assertEquals("Just a description", results.get(0).getName());
+        assertThat(results).satisfies(r -> {
+            assertThat(r).isNotNull();
+            assertThat(r.get(0)).hasId(1L);
+            assertThat(r.get(0)).hasName("Just a description");
+        });
     }
 
     @Test
@@ -51,7 +55,7 @@ class RecipeServiceImplTest {
         Mockito.when(recipeRepository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(recipe));
         Mockito.when(conversionService.convert(ArgumentMatchers.any(Recipe.class), ArgumentMatchers.eq(RecipeForm.class))).thenReturn(recipeFormMock);
         RecipeForm recipeForm = recipeService.getRecipe(1L);
-        assertNotNull(recipeForm);
+        assertThat(recipeForm).isNotNull();
     }
 
     @Test

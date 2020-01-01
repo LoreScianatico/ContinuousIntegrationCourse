@@ -12,6 +12,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 class IntegrationTest {
 
@@ -35,15 +37,15 @@ class IntegrationTest {
 
         //Check that there is no recipe
         String messageText = page.getHtmlElementById("title").getTextContent();
-        Assertions.assertEquals("My Recipes!", messageText);
+        assertEquals("My Recipes!", messageText);
         List<DomElement> recipesRows = page.getElementsById("recipe-row");
-        Assertions.assertEquals(0, recipesRows.size());
+        assertEquals(0, recipesRows.size());
 
         //Add a recipe
         HtmlElement button = page.getHtmlElementById("add-button");
         page = button.click();
         messageText = page.getHtmlElementById("title").getTextContent();
-        Assertions.assertEquals("Recipe Information", messageText);
+        assertEquals("Recipe Information", messageText);
 
         HtmlTextInput name = page.getHtmlElementById("recipe-name");
         name.setValueAttribute("Cake");
@@ -66,15 +68,15 @@ class IntegrationTest {
         //Check that we have a recipe
 
         messageText = page.getHtmlElementById("title").getTextContent();
-        Assertions.assertEquals("My Recipes!", messageText);
+        assertEquals("My Recipes!", messageText);
         recipesRows = page.getElementsById("recipe-row");
-        Assertions.assertEquals(1, recipesRows.size());
+        assertEquals(1, recipesRows.size());
 
         //Open it
         HtmlElement openButton = page.getHtmlElementById("open-link");
         page = openButton.click();
         HtmlTextInput nameOpened = page.getHtmlElementById("recipe-name");
-        Assertions.assertEquals("Cake", nameOpened.getValueAttribute());
+        assertEquals("Cake", nameOpened.getValueAttribute());
 
         //Delete it
         page = webClient.getPage(url);
@@ -83,6 +85,6 @@ class IntegrationTest {
 
         //Check that we have no recipe, again
         recipesRows = page.getElementsById("recipe-row");
-        Assertions.assertEquals(0, recipesRows.size());
+        assertEquals(0, recipesRows.size());
     }
 }

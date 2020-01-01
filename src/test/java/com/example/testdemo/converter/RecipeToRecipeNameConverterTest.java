@@ -5,7 +5,7 @@ import com.example.testdemo.model.Recipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static com.example.testdemo.form.RecipeNameAssert.assertThat;
 
 class RecipeToRecipeNameConverterTest {
 
@@ -21,9 +21,11 @@ class RecipeToRecipeNameConverterTest {
 
         Recipe recipe = Recipe.builder().id(1L).name("Name").build();
         RecipeName recipeName = converter.convert(recipe);
-        assertNotNull(recipeName);
-        assertEquals(recipe.getId(), recipeName.getId());
-        assertEquals(recipe.getName(), recipeName.getName());
+        assertThat(recipeName).satisfies(rN -> {
+            assertThat(rN).isNotNull();
+            assertThat(rN).hasId(recipe.getId());
+            assertThat(rN).hasName(recipe.getName());
+        });
 
     }
 }
